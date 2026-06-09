@@ -165,8 +165,9 @@
                     <li class="nav-item dropdown">
                         <a
                             class="nav-link dropdown-toggle me-3
-                            {% if request.path == url_for('ai_assistant') %}
-                                active
+                            {% if request.path == url_for('ai_assistant')
+                               or request.path == url_for('image_generator') %}
+                                is-active
                             {% endif %}"
                             href="#"
                             id="aiToolsDropdown"
@@ -198,10 +199,11 @@
                             <!-- Image Generator -->
                             <li>
                                 <a
-                                    class="dropdown-item disabled"
-                                    href="#"
-                                    aria-disabled="true"
-                                    tabindex="-1"
+                                    class="dropdown-item
+                                    {% if request.path == url_for('image_generator') %}
+                                        active
+                                    {% endif %}"
+                                    href="{{ url_for('image_generator') }}"
                                 >
                                     <i class="bx bx-image-add me-2"></i>
                                     Image Generator
