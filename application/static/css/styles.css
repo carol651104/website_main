@@ -1,3 +1,4 @@
+```css
 /*********************/
 /*  GENERAL CSS      */
 /*********************/
@@ -10,11 +11,6 @@
     --highlights-v2-color: rgb(240, 160, 11);
     --buttons-color: rgba(255, 178, 13, 0.7);
     --buttons-hover-color: rgba(245, 191, 76, 0.7);
-
-    /* AI Assistant */
-    --assistant-user-color: rgba(240, 160, 11, 0.25);
-    --assistant-ai-color: rgba(255, 255, 255, 0.35);
-    --assistant-border-color: rgba(74, 64, 99, 0.25);
 }
 
 html {
@@ -22,9 +18,9 @@ html {
 }
 
 body {
+    min-height: 100vh;
     background: rgb(200, 198, 215);
     font-family: "Lora", serif;
-    min-height: 100vh;
 }
 
 .background {
@@ -39,8 +35,8 @@ body {
     background-color: var(--buttons-color);
     box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.75);
     border-radius: 25px;
-    font-weight: 600;
     font-size: 18px;
+    font-weight: 600;
     transition: 0.3s;
 }
 
@@ -50,8 +46,8 @@ body {
 }
 
 .btn a {
-    text-decoration: none;
     color: inherit;
+    text-decoration: none;
 }
 
 /*********************/
@@ -123,10 +119,10 @@ body {
 /*********************/
 
 .navbar .dropdown-menu {
+    padding: 0.5rem;
     background-color: var(--main-color);
     border: 1px solid rgba(255, 255, 255, 0.15);
     border-radius: 12px;
-    padding: 0.5rem;
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
 }
 
@@ -173,12 +169,6 @@ body {
 
 .description {
     margin-top: 15rem;
-}
-
-@media (max-width: 576px) {
-    .description {
-        margin-top: 10rem;
-    }
 }
 
 .description .main-text {
@@ -285,8 +275,8 @@ body {
 
 .skills .inner-card .card-title {
     color: rgb(0, 0, 0);
-    font-weight: 500;
     font-size: 15px;
+    font-weight: 500;
 }
 
 .skills .inner-card .img-fluid {
@@ -337,10 +327,10 @@ body {
 }
 
 .contact .form-control {
+    padding-left: 2rem;
     background-color: rgba(216, 216, 216, 0.5);
     border-color: rgba(216, 216, 216, 0.7);
     border-radius: 35px;
-    padding-left: 2rem;
 }
 
 .contact .form-control:focus {
@@ -375,10 +365,11 @@ select option {
 /*********************/
 
 .loading {
+    position: relative;
+    top: 40%;
+    left: 50%;
     width: 600px;
     height: 36px;
-    left: 50%;
-    top: 40%;
     margin-left: -300px;
     overflow: visible;
     cursor: default;
@@ -388,13 +379,13 @@ select option {
     position: absolute;
     width: 20px;
     height: 66px;
-    opacity: 0;
-    animation: move 2s linear infinite;
-    transform: rotate(180deg);
     color: var(--highlights-color);
     font-family: "Orbitron", sans-serif;
     font-size: 50px;
     font-weight: 700;
+    opacity: 0;
+    transform: rotate(180deg);
+    animation: move 2s linear infinite;
 }
 
 .loading div:nth-child(2) {
@@ -429,364 +420,166 @@ select option {
 
     35% {
         left: 41%;
-        transform: rotate(0deg);
         opacity: 1;
+        transform: rotate(0deg);
     }
 
     65% {
         left: 59%;
-        transform: rotate(0deg);
         opacity: 1;
+        transform: rotate(0deg);
     }
 
     100% {
         left: 100%;
-        transform: rotate(-180deg);
         opacity: 0;
+        transform: rotate(-180deg);
     }
 }
 
 /************************/
-/*  AI ASSISTANT        */
+/*  AI TEXT ASSISTANT   */
 /************************/
 
-.ai-assistant {
-    margin-top: 9rem;
-    margin-bottom: 5rem;
+.ai-tool-container {
     min-height: 75vh;
+    margin-top: 10rem;
+    margin-bottom: 6rem;
 }
 
-.ai-assistant .page-title {
-    color: var(--highlights-color);
-    font-weight: 900;
-    font-size: 42px;
-}
-
-.ai-assistant .page-subtitle {
-    color: var(--main-color);
-    font-size: 18px;
-    font-weight: 500;
-    line-height: 1.8;
-    max-width: 750px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.ai-assistant .assistant-card {
-    max-width: 900px;
-    margin: 2rem auto 0;
-    padding: 2rem;
+.ai-tool-card {
+    padding: 2.5rem;
     background: rgba(255, 255, 255, 0.18);
-    border: 1px solid rgba(255, 255, 255, 0.30);
+    border: 1px solid rgba(255, 255, 255, 0.35);
     border-radius: 24px;
     box-shadow: 0 12px 35px rgba(50, 35, 70, 0.18);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
 }
 
-.ai-assistant .assistant-header {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    padding-bottom: 1.25rem;
-    margin-bottom: 1.5rem;
-    border-bottom: 1px solid var(--assistant-border-color);
-}
-
-.ai-assistant .assistant-icon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    width: 58px;
-    height: 58px;
-    color: white;
-    background: linear-gradient(
-        135deg,
-        var(--highlights-color),
-        var(--main-color)
-    );
-    border-radius: 50%;
-    font-size: 27px;
-    box-shadow: 0 5px 18px rgba(67, 5, 126, 0.25);
-}
-
-.ai-assistant .assistant-header-text h2 {
-    color: var(--highlights-color);
-    font-size: 24px;
-    font-weight: 800;
-    margin: 0 0 0.25rem;
-}
-
-.ai-assistant .assistant-header-text p {
-    color: rgba(0, 0, 0, 0.65);
-    font-size: 15px;
-    margin: 0;
-}
-
-/************************/
-/*  CHAT AREA           */
-/************************/
-
-.ai-assistant .chat-container,
-.ai-assistant .chat-box {
-    min-height: 280px;
-    max-height: 500px;
-    padding: 1.5rem;
-    margin-bottom: 1.5rem;
-    overflow-y: auto;
-    background: rgba(255, 255, 255, 0.18);
-    border: 1px solid var(--assistant-border-color);
-    border-radius: 18px;
-    scroll-behavior: smooth;
-}
-
-.ai-assistant .chat-container::-webkit-scrollbar,
-.ai-assistant .chat-box::-webkit-scrollbar {
-    width: 8px;
-}
-
-.ai-assistant .chat-container::-webkit-scrollbar-track,
-.ai-assistant .chat-box::-webkit-scrollbar-track {
-    background: rgba(255, 255, 255, 0.20);
-    border-radius: 10px;
-}
-
-.ai-assistant .chat-container::-webkit-scrollbar-thumb,
-.ai-assistant .chat-box::-webkit-scrollbar-thumb {
-    background: rgba(74, 64, 99, 0.45);
-    border-radius: 10px;
-}
-
-.ai-assistant .chat-container::-webkit-scrollbar-thumb:hover,
-.ai-assistant .chat-box::-webkit-scrollbar-thumb:hover {
-    background: rgba(74, 64, 99, 0.70);
-}
-
-/************************/
-/*  CHAT MESSAGES       */
-/************************/
-
-.ai-assistant .chat-message,
-.ai-assistant .message {
-    width: fit-content;
-    max-width: 82%;
-    padding: 0.9rem 1.2rem;
-    margin-bottom: 1rem;
-    border-radius: 18px;
-    line-height: 1.7;
-    word-break: break-word;
-    white-space: pre-wrap;
-}
-
-.ai-assistant .user-message {
-    margin-left: auto;
-    color: rgb(48, 38, 23);
-    background-color: var(--assistant-user-color);
-    border-bottom-right-radius: 5px;
-    box-shadow: 0 4px 12px rgba(240, 160, 11, 0.12);
-}
-
-.ai-assistant .assistant-message,
-.ai-assistant .ai-message {
-    margin-right: auto;
-    color: rgb(40, 34, 48);
-    background-color: var(--assistant-ai-color);
-    border-bottom-left-radius: 5px;
-    box-shadow: 0 4px 12px rgba(74, 64, 99, 0.10);
-}
-
-.ai-assistant .message-label {
-    display: block;
-    color: var(--highlights-color);
-    font-size: 13px;
-    font-weight: 800;
-    margin-bottom: 0.35rem;
-}
-
-.ai-assistant .welcome-message {
-    color: rgba(0, 0, 0, 0.65);
-    font-size: 16px;
-    line-height: 1.8;
-    text-align: center;
-    padding: 2rem 1rem;
-}
-
-.ai-assistant .welcome-message i {
-    display: block;
-    color: var(--highlights-color);
-    font-size: 40px;
-    margin-bottom: 1rem;
-}
-
-/************************/
-/*  ASSISTANT FORM      */
-/************************/
-
-.ai-assistant .assistant-form,
-.ai-assistant .prompt-form {
-    width: 100%;
-}
-
-.ai-assistant .form-label {
-    color: var(--highlights-color);
-    font-weight: 700;
+.ai-tool-label {
     margin-bottom: 0.6rem;
+    color: var(--highlights-v2-color);
+    font-size: 14px;
+    font-weight: 800;
+    letter-spacing: 2px;
 }
 
-.ai-assistant .input-group {
-    align-items: stretch;
-    gap: 0.75rem;
+.ai-tool-title {
+    margin-bottom: 1rem;
+    color: var(--highlights-color);
+    font-size: 42px;
+    font-weight: 900;
 }
 
-.ai-assistant .form-control,
-.ai-assistant textarea,
-.ai-assistant input[type="text"] {
-    width: 100%;
-    min-height: 56px;
-    padding: 0.9rem 1.4rem;
+.ai-tool-description {
+    max-width: 650px;
+    margin-right: auto;
+    margin-left: auto;
+    color: rgba(40, 34, 48, 0.75);
+    font-size: 17px;
+    line-height: 1.8;
+}
+
+.ai-tool-card .form-label {
+    margin-bottom: 0.7rem;
+    color: var(--highlights-color);
+    font-size: 17px;
+    font-weight: 700;
+}
+
+.ai-prompt-input {
+    min-height: 210px;
+    padding: 1.2rem 1.4rem;
     color: rgb(40, 34, 48);
-    background-color: rgba(255, 255, 255, 0.35);
+    background-color: rgba(255, 255, 255, 0.38);
     border: 1px solid rgba(74, 64, 99, 0.25);
     border-radius: 18px;
     font-family: "Lora", serif;
     font-size: 16px;
-    line-height: 1.6;
+    line-height: 1.8;
     resize: vertical;
     transition: 0.25s;
 }
 
-.ai-assistant textarea {
-    min-height: 120px;
+.ai-prompt-input::placeholder {
+    color: rgba(0, 0, 0, 0.42);
 }
 
-.ai-assistant .form-control::placeholder,
-.ai-assistant textarea::placeholder,
-.ai-assistant input[type="text"]::placeholder {
-    color: rgba(0, 0, 0, 0.45);
-}
-
-.ai-assistant .form-control:focus,
-.ai-assistant textarea:focus,
-.ai-assistant input[type="text"]:focus {
+.ai-prompt-input:focus {
     color: rgb(40, 34, 48);
-    background-color: rgba(255, 255, 255, 0.50);
+    background-color: rgba(255, 255, 255, 0.52);
     border-color: var(--highlights-color);
     outline: none;
     box-shadow: 0 0 0 0.2rem rgba(67, 5, 126, 0.15);
 }
 
-/************************/
-/*  SEND BUTTON         */
-/************************/
-
-.ai-assistant .send-button,
-.ai-assistant .submit-button,
-.ai-assistant button[type="submit"] {
-    min-width: 140px;
-    min-height: 54px;
-    padding: 0.8rem 1.5rem;
-    color: rgb(42, 31, 10);
+.ai-generate-button {
+    min-width: 180px;
+    padding: 0.85rem 1.8rem;
+    color: rgb(45, 32, 10);
     background-color: var(--buttons-color);
     border: none;
-    border-radius: 18px;
-    box-shadow: 0 6px 18px rgba(70, 45, 15, 0.22);
+    border-radius: 25px;
     font-family: "Lora", serif;
-    font-size: 17px;
+    font-size: 18px;
     font-weight: 800;
-    cursor: pointer;
     transition: 0.3s;
 }
 
-.ai-assistant .send-button:hover,
-.ai-assistant .submit-button:hover,
-.ai-assistant button[type="submit"]:hover {
+.ai-generate-button:hover {
+    color: rgb(45, 32, 10);
     background-color: var(--buttons-hover-color);
-    transform: translateY(-2px);
-    box-shadow: 0 8px 22px rgba(70, 45, 15, 0.30);
+    transform: translateY(-2px) scale(1.03);
 }
 
-.ai-assistant .send-button:active,
-.ai-assistant .submit-button:active,
-.ai-assistant button[type="submit"]:active {
+.ai-generate-button:active {
     transform: translateY(0);
 }
 
-.ai-assistant .send-button:disabled,
-.ai-assistant .submit-button:disabled,
-.ai-assistant button[type="submit"]:disabled {
-    opacity: 0.55;
-    cursor: not-allowed;
-    transform: none;
+.ai-generate-button i {
+    margin-right: 0.4rem;
+    font-size: 21px;
+    vertical-align: middle;
 }
 
-/************************/
-/*  ERROR MESSAGE       */
-/************************/
+.ai-result-card {
+    padding: 1.6rem;
+    background: rgba(255, 255, 255, 0.30);
+    border: 1px solid rgba(74, 64, 99, 0.20);
+    border-radius: 18px;
+    box-shadow: 0 6px 20px rgba(74, 64, 99, 0.10);
+}
 
-.ai-assistant .error-message,
-.ai-assistant .alert-error {
+.ai-result-title {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+    color: var(--highlights-color);
+    font-size: 22px;
+    font-weight: 800;
+}
+
+.ai-result-title i {
+    font-size: 26px;
+}
+
+.ai-result-text {
+    color: rgb(40, 34, 48);
+    font-size: 16px;
+    line-height: 1.9;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+}
+
+.ai-tool-card .alert-danger {
     padding: 1rem 1.25rem;
-    margin-bottom: 1.25rem;
     color: rgb(112, 23, 23);
-    background-color: rgba(255, 180, 180, 0.45);
+    background-color: rgba(255, 190, 190, 0.55);
     border: 1px solid rgba(150, 30, 30, 0.25);
     border-radius: 14px;
     font-weight: 600;
-}
-
-.ai-assistant .success-message {
-    padding: 1rem 1.25rem;
-    margin-bottom: 1.25rem;
-    color: rgb(30, 91, 48);
-    background-color: rgba(180, 245, 198, 0.45);
-    border: 1px solid rgba(30, 120, 60, 0.25);
-    border-radius: 14px;
-    font-weight: 600;
-}
-
-/************************/
-/*  AI LOADING          */
-/************************/
-
-.ai-assistant .assistant-loading {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.45rem;
-    padding: 1rem;
-    color: var(--highlights-color);
-    font-weight: 700;
-}
-
-.ai-assistant .assistant-loading span {
-    width: 9px;
-    height: 9px;
-    background-color: var(--highlights-color);
-    border-radius: 50%;
-    animation: assistantTyping 1.2s infinite ease-in-out;
-}
-
-.ai-assistant .assistant-loading span:nth-child(2) {
-    animation-delay: 0.15s;
-}
-
-.ai-assistant .assistant-loading span:nth-child(3) {
-    animation-delay: 0.30s;
-}
-
-@keyframes assistantTyping {
-    0%,
-    80%,
-    100% {
-        opacity: 0.35;
-        transform: translateY(0);
-    }
-
-    40% {
-        opacity: 1;
-        transform: translateY(-6px);
-    }
 }
 
 /************************/
@@ -794,63 +587,38 @@ select option {
 /************************/
 
 @media (max-width: 768px) {
-    .ai-assistant {
+    .ai-tool-container {
         margin-top: 7rem;
         margin-bottom: 3rem;
     }
 
-    .ai-assistant .page-title {
-        font-size: 34px;
-    }
-
-    .ai-assistant .page-subtitle {
-        font-size: 16px;
-        padding: 0 0.75rem;
-    }
-
-    .ai-assistant .assistant-card {
-        padding: 1.25rem;
+    .ai-tool-card {
+        padding: 1.5rem;
         border-radius: 18px;
     }
 
-    .ai-assistant .assistant-header {
-        align-items: flex-start;
+    .ai-tool-title {
+        font-size: 34px;
     }
 
-    .ai-assistant .assistant-icon {
-        width: 50px;
-        height: 50px;
-        font-size: 23px;
+    .ai-tool-description {
+        font-size: 16px;
     }
 
-    .ai-assistant .assistant-header-text h2 {
-        font-size: 21px;
+    .ai-prompt-input {
+        min-height: 180px;
     }
 
-    .ai-assistant .chat-container,
-    .ai-assistant .chat-box {
-        min-height: 240px;
-        max-height: 420px;
-        padding: 1rem;
-    }
-
-    .ai-assistant .chat-message,
-    .ai-assistant .message {
-        max-width: 92%;
-    }
-
-    .ai-assistant .input-group {
-        flex-direction: column;
-    }
-
-    .ai-assistant .send-button,
-    .ai-assistant .submit-button,
-    .ai-assistant button[type="submit"] {
+    .ai-generate-button {
         width: 100%;
     }
 }
 
 @media (max-width: 576px) {
+    .description {
+        margin-top: 10rem;
+    }
+
     .description .main-text {
         font-size: 38px;
     }
@@ -859,42 +627,38 @@ select option {
         font-size: 23px;
     }
 
-    .ai-assistant .page-title {
+    .ai-tool-card {
+        padding: 1.2rem;
+    }
+
+    .ai-tool-label {
+        font-size: 12px;
+        letter-spacing: 1.5px;
+    }
+
+    .ai-tool-title {
         font-size: 30px;
     }
 
-    .ai-assistant .assistant-card {
-        padding: 1rem;
+    .ai-tool-description {
+        font-size: 15px;
     }
 
-    .ai-assistant .assistant-header {
-        gap: 0.75rem;
+    .ai-result-card {
+        padding: 1.2rem;
     }
 
-    .ai-assistant .assistant-icon {
-        width: 44px;
-        height: 44px;
+    .ai-result-title {
         font-size: 20px;
     }
 
-    .ai-assistant .assistant-header-text h2 {
-        font-size: 19px;
-    }
-
-    .ai-assistant .assistant-header-text p {
-        font-size: 14px;
-    }
-
-    .ai-assistant .chat-message,
-    .ai-assistant .message {
-        max-width: 96%;
-        padding: 0.8rem 1rem;
+    .ai-result-text {
         font-size: 15px;
     }
 
     .loading {
-        width: 100%;
         left: 0;
+        width: 100%;
         margin-left: 0;
     }
 }
