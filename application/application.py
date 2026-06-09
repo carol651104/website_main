@@ -1,4 +1,4 @@
-```python
+
 # Sets up the routes for all the pages
 
 import os
