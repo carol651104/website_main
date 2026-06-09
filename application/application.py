@@ -1,7 +1,11 @@
 # Sets up the routes for all the pages
 
+import os
+
 from flask import Flask, render_template, request, make_response
 from flask_caching import Cache
+from openai import OpenAI
+
 from config import TEMPLATES_PATH, TEXT_PATH
 from application.helpers import *
 
@@ -83,3 +87,71 @@ def result():
     """Renders the 'Result' page of the website."""
 
     return render_template("result.html")
+
+@app.route("/ai-assistant", methods=["GET", "POST"])
+def ai_assistant():
+    """Renders the OpenAI text assistant page."""
+
+    generated_text = ""
+    error_message = ""
+    prompt = ""
+
+    if request.method == "POST":
+        prompt = request.form.get("prompt", "").strip()
+
+        if not prompt:
+            error_message = "請先輸入問題或文字內容。"
+
+        else:
+            api_key = os.getenv("OPENAI_API_KEY")
+
+            if not api_key:
+                error_message = (
+                    "伺服器尚未設定 OPENAI_API_KEY，"
+                    "請至 Render Environment 設定。"
+                )
+
+            else:
+                try:
+                    client = OpenAI(api_key=api_key)
+
+                    response = client.chat.completions.create(
+                        model="gpt-4o-mini",
+                        messages=[
+                            {
+                                "role": "system",
+                                "content": (
+                                    "你是一位友善且專業的 AI 助理。"
+                                    "除非使用者要求其他語言，"
+                                    "否則請使用繁體中文回答。"
+                                ),
+                            },
+                            {
+                                "role": "user",
+                                "content": prompt,
+                            },
+                        ],
+                        temperature=0.5,
+                    )
+
+                    generated_text = (
+                        response.choices[0]
+                        .message.content
+                        .strip()
+                    )
+
+                except Exception as error:
+                    app.logger.exception(
+                        "OpenAI assistant request failed"
+                    )
+
+                    error_message = (
+                        f"AI 文字生成失敗：{error}"
+                    )
+
+    return render_template(
+        "ai_assistant.html",
+        prompt=prompt,
+        response=generated_text,
+        error=error_message,
+    )
