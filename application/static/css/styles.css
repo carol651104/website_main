@@ -1,4 +1,4 @@
-```css
+
 /*********************/
 /*  GENERAL CSS      */
 /*********************/
@@ -583,34 +583,359 @@ select option {
 }
 
 /************************/
+/*  IMAGE GENERATOR     */
+/************************/
+
+.image-generator-container {
+    min-height: 75vh;
+    margin-top: 10rem;
+    margin-bottom: 6rem;
+}
+
+.image-generator-card {
+    padding: 2.5rem;
+    background: rgba(255, 255, 255, 0.18);
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    border-radius: 24px;
+    box-shadow: 0 12px 35px rgba(50, 35, 70, 0.18);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+.image-generator-label {
+    margin-bottom: 0.6rem;
+    color: var(--highlights-v2-color);
+    font-size: 14px;
+    font-weight: 800;
+    letter-spacing: 2px;
+}
+
+.image-generator-title {
+    margin-bottom: 1rem;
+    color: var(--highlights-color);
+    font-size: 42px;
+    font-weight: 900;
+}
+
+.image-generator-description {
+    max-width: 680px;
+    margin-right: auto;
+    margin-left: auto;
+    color: rgba(40, 34, 48, 0.75);
+    font-size: 17px;
+    line-height: 1.8;
+}
+
+.image-generator-card .form-label {
+    margin-bottom: 0.7rem;
+    color: var(--highlights-color);
+    font-size: 17px;
+    font-weight: 700;
+}
+
+.image-prompt-input {
+    min-height: 170px;
+    padding: 1.2rem 1.4rem;
+    color: rgb(40, 34, 48);
+    background-color: rgba(255, 255, 255, 0.38);
+    border: 1px solid rgba(74, 64, 99, 0.25);
+    border-radius: 18px;
+    font-family: "Lora", serif;
+    font-size: 16px;
+    line-height: 1.8;
+    resize: vertical;
+    transition: 0.25s;
+}
+
+.image-prompt-input::placeholder {
+    color: rgba(0, 0, 0, 0.42);
+}
+
+.image-prompt-input:focus {
+    color: rgb(40, 34, 48);
+    background-color: rgba(255, 255, 255, 0.52);
+    border-color: var(--highlights-color);
+    outline: none;
+    box-shadow: 0 0 0 0.2rem rgba(67, 5, 126, 0.15);
+}
+
+.image-form-help {
+    margin-top: 0.6rem;
+    color: rgba(40, 34, 48, 0.60);
+    font-size: 14px;
+}
+
+.image-size-select {
+    min-height: 54px;
+    padding: 0.75rem 1.2rem;
+    color: rgb(40, 34, 48);
+    background-color: rgba(255, 255, 255, 0.38);
+    border: 1px solid rgba(74, 64, 99, 0.25);
+    border-radius: 18px;
+    font-family: "Lora", serif;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.25s;
+}
+
+.image-size-select:focus {
+    color: rgb(40, 34, 48);
+    background-color: rgba(255, 255, 255, 0.52);
+    border-color: var(--highlights-color);
+    outline: none;
+    box-shadow: 0 0 0 0.2rem rgba(67, 5, 126, 0.15);
+}
+
+.image-size-select option {
+    color: rgb(40, 34, 48);
+    background-color: rgb(235, 233, 243);
+}
+
+.image-generate-button {
+    min-width: 190px;
+    padding: 0.85rem 1.8rem;
+    color: rgb(45, 32, 10);
+    background-color: var(--buttons-color);
+    border: none;
+    border-radius: 25px;
+    font-family: "Lora", serif;
+    font-size: 18px;
+    font-weight: 800;
+    transition: 0.3s;
+}
+
+.image-generate-button:hover {
+    color: rgb(45, 32, 10);
+    background-color: var(--buttons-hover-color);
+    transform: translateY(-2px) scale(1.03);
+}
+
+.image-generate-button:active {
+    transform: translateY(0);
+}
+
+.image-generate-button:disabled {
+    opacity: 0.65;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.image-generate-button i {
+    margin-right: 0.4rem;
+    font-size: 22px;
+    vertical-align: middle;
+}
+
+.image-generation-loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.9rem;
+    padding: 1.2rem;
+    color: var(--highlights-color);
+    background: rgba(255, 255, 255, 0.25);
+    border: 1px solid rgba(74, 64, 99, 0.15);
+    border-radius: 16px;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.image-loading-spinner {
+    width: 28px;
+    height: 28px;
+    border: 4px solid rgba(67, 5, 126, 0.18);
+    border-top-color: var(--highlights-color);
+    border-radius: 50%;
+    animation: imageSpinner 0.9s linear infinite;
+}
+
+@keyframes imageSpinner {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.image-generator-card .alert-danger {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 1rem 1.25rem;
+    color: rgb(112, 23, 23);
+    background-color: rgba(255, 190, 190, 0.55);
+    border: 1px solid rgba(150, 30, 30, 0.25);
+    border-radius: 14px;
+    font-weight: 600;
+}
+
+.image-generator-card .alert-danger i {
+    flex-shrink: 0;
+    font-size: 22px;
+}
+
+.generated-image-card {
+    padding: 1.6rem;
+    background: rgba(255, 255, 255, 0.30);
+    border: 1px solid rgba(74, 64, 99, 0.20);
+    border-radius: 20px;
+    box-shadow: 0 6px 20px rgba(74, 64, 99, 0.10);
+}
+
+.generated-image-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 1.2rem;
+}
+
+.generated-image-title {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 0;
+    color: var(--highlights-color);
+    font-size: 22px;
+    font-weight: 800;
+}
+
+.generated-image-title i {
+    font-size: 27px;
+}
+
+.generated-image-size {
+    padding: 0.4rem 0.8rem;
+    color: var(--main-color);
+    background-color: rgba(191, 172, 200, 0.38);
+    border: 1px solid rgba(74, 64, 99, 0.16);
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.generated-image-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.22);
+    border: 1px solid rgba(74, 64, 99, 0.15);
+    border-radius: 18px;
+}
+
+.generated-image {
+    display: block;
+    width: auto;
+    max-width: 100%;
+    max-height: 760px;
+    object-fit: contain;
+    border-radius: 14px;
+    box-shadow: 0 10px 30px rgba(40, 30, 55, 0.20);
+}
+
+.generated-image-information {
+    margin-top: 1.4rem;
+    padding: 1.2rem;
+    background: rgba(255, 255, 255, 0.20);
+    border-radius: 14px;
+}
+
+.generated-image-information h3 {
+    margin-bottom: 0.6rem;
+    color: var(--highlights-color);
+    font-size: 18px;
+    font-weight: 800;
+}
+
+.generated-image-information p {
+    margin-bottom: 0;
+    color: rgb(40, 34, 48);
+    font-size: 15px;
+    line-height: 1.8;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+}
+
+.image-download-button {
+    min-width: 170px;
+    padding: 0.75rem 1.5rem;
+    color: rgb(45, 32, 10);
+    background-color: var(--buttons-color);
+    border: none;
+    border-radius: 25px;
+    font-family: "Lora", serif;
+    font-size: 16px;
+    font-weight: 800;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.image-download-button:hover {
+    color: rgb(45, 32, 10);
+    background-color: var(--buttons-hover-color);
+    text-decoration: none;
+    transform: translateY(-2px) scale(1.03);
+}
+
+.image-download-button i {
+    margin-right: 0.4rem;
+    font-size: 20px;
+    vertical-align: middle;
+}
+
+/************************/
 /*  RESPONSIVE DESIGN   */
 /************************/
 
 @media (max-width: 768px) {
-    .ai-tool-container {
+    .ai-tool-container,
+    .image-generator-container {
         margin-top: 7rem;
         margin-bottom: 3rem;
     }
 
-    .ai-tool-card {
+    .ai-tool-card,
+    .image-generator-card {
         padding: 1.5rem;
         border-radius: 18px;
     }
 
-    .ai-tool-title {
+    .ai-tool-title,
+    .image-generator-title {
         font-size: 34px;
     }
 
-    .ai-tool-description {
+    .ai-tool-description,
+    .image-generator-description {
         font-size: 16px;
     }
 
-    .ai-prompt-input {
+    .ai-prompt-input,
+    .image-prompt-input {
         min-height: 180px;
     }
 
-    .ai-generate-button {
+    .ai-generate-button,
+    .image-generate-button,
+    .image-download-button {
         width: 100%;
+    }
+
+    .generated-image-header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .generated-image-wrapper {
+        padding: 0.75rem;
+    }
+
+    .generated-image {
+        max-height: 620px;
     }
 }
 
@@ -627,33 +952,76 @@ select option {
         font-size: 23px;
     }
 
-    .ai-tool-card {
+    .ai-tool-card,
+    .image-generator-card {
         padding: 1.2rem;
     }
 
-    .ai-tool-label {
+    .ai-tool-label,
+    .image-generator-label {
         font-size: 12px;
         letter-spacing: 1.5px;
     }
 
-    .ai-tool-title {
+    .ai-tool-title,
+    .image-generator-title {
         font-size: 30px;
     }
 
-    .ai-tool-description {
+    .ai-tool-description,
+    .image-generator-description {
         font-size: 15px;
     }
 
-    .ai-result-card {
+    .ai-result-card,
+    .generated-image-card {
         padding: 1.2rem;
     }
 
-    .ai-result-title {
+    .ai-result-title,
+    .generated-image-title {
         font-size: 20px;
     }
 
     .ai-result-text {
         font-size: 15px;
+    }
+
+    .image-prompt-input {
+        min-height: 160px;
+        padding: 1rem;
+        font-size: 15px;
+    }
+
+    .image-size-select {
+        font-size: 15px;
+    }
+
+    .image-generation-loading {
+        align-items: center;
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .generated-image-wrapper {
+        padding: 0.5rem;
+    }
+
+    .generated-image {
+        max-height: 500px;
+        border-radius: 10px;
+    }
+
+    .generated-image-information {
+        padding: 1rem;
+    }
+
+    .generated-image-information h3 {
+        font-size: 17px;
+    }
+
+    .generated-image-information p {
+        font-size: 14px;
     }
 
     .loading {
