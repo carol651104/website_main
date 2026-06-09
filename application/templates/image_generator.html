@@ -1,0 +1,209 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Image Generator
+{% endblock %}
+
+{% block main %}
+<div class="container image-generator-container">
+    <div class="row justify-content-center">
+        <div class="col-lg-10 col-xl-9">
+
+            <section class="image-generator-card">
+                <div class="text-center mb-4">
+                    <p class="image-generator-label">
+                        OPENAI APPLICATION
+                    </p>
+
+                    <h1 class="image-generator-title">
+                        AI 圖片生成器
+                    </h1>
+
+                    <p class="image-generator-description">
+                        輸入你想生成的圖片內容，選擇圖片尺寸，
+                        讓 AI 協助你產生圖片。
+                    </p>
+                </div>
+
+                <form
+                    method="POST"
+                    action="{{ url_for('image_generator') }}"
+                    id="image-generator-form"
+                >
+                    <div class="mb-4">
+                        <label
+                            for="prompt"
+                            class="form-label fw-bold"
+                        >
+                            圖片描述
+                        </label>
+
+                        <textarea
+                            id="prompt"
+                            name="prompt"
+                            class="form-control image-prompt-input"
+                            rows="6"
+                            maxlength="2000"
+                            placeholder="例如：一座位於雲端之上的未來科技城市，粉紫色天空，簡約高級風格"
+                            required
+                        >{{ prompt }}</textarea>
+
+                        <div class="form-text image-form-help">
+                            請盡量描述主題、場景、風格、色調與構圖。
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <label
+                            for="size"
+                            class="form-label fw-bold"
+                        >
+                            圖片尺寸
+                        </label>
+
+                        <select
+                            id="size"
+                            name="size"
+                            class="form-select image-size-select"
+                            required
+                        >
+                            <option
+                                value="1024x1024"
+                                {% if selected_size == "1024x1024" %}
+                                    selected
+                                {% endif %}
+                            >
+                                正方形｜1024 × 1024
+                            </option>
+
+                            <option
+                                value="1536x1024"
+                                {% if selected_size == "1536x1024" %}
+                                    selected
+                                {% endif %}
+                            >
+                                橫式｜1536 × 1024
+                            </option>
+
+                            <option
+                                value="1024x1536"
+                                {% if selected_size == "1024x1536" %}
+                                    selected
+                                {% endif %}
+                            >
+                                直式｜1024 × 1536
+                            </option>
+                        </select>
+                    </div>
+
+                    <div class="text-center">
+                        <button
+                            type="submit"
+                            class="btn image-generate-button"
+                            id="image-generate-button"
+                        >
+                            <i class="bx bx-image-add"></i>
+                            生成圖片
+                        </button>
+                    </div>
+                </form>
+
+                <div
+                    class="image-generation-loading mt-4"
+                    id="image-generation-loading"
+                    style="display: none;"
+                >
+                    <div class="image-loading-spinner"></div>
+
+                    <p class="mb-0">
+                        AI 正在生成圖片，請稍候……
+                    </p>
+                </div>
+
+                {% if error %}
+                    <div
+                        class="alert alert-danger mt-4"
+                        role="alert"
+                    >
+                        <i class="bx bx-error-circle"></i>
+                        {{ error }}
+                    </div>
+                {% endif %}
+
+                {% if image_url %}
+                    <section class="generated-image-card mt-4">
+                        <div class="generated-image-header">
+                            <h2 class="generated-image-title">
+                                <i class="bx bx-image"></i>
+                                生成結果
+                            </h2>
+
+                            <span class="generated-image-size">
+                                {{ selected_size }}
+                            </span>
+                        </div>
+
+                        <div class="generated-image-wrapper">
+                            <img
+                                src="{{ image_url }}"
+                                alt="AI 生成圖片：{{ prompt }}"
+                                class="generated-image"
+                            >
+                        </div>
+
+                        <div class="generated-image-information">
+                            <h3>
+                                圖片描述
+                            </h3>
+
+                            <p>
+                                {{ prompt }}
+                            </p>
+                        </div>
+
+                        <div class="text-center mt-3">
+                            <a
+                                href="{{ image_url }}"
+                                download="ai-generated-image.png"
+                                class="btn image-download-button"
+                            >
+                                <i class="bx bx-download"></i>
+                                下載圖片
+                            </a>
+                        </div>
+                    </section>
+                {% endif %}
+            </section>
+
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const form = document.getElementById(
+            "image-generator-form"
+        );
+
+        const submitButton = document.getElementById(
+            "image-generate-button"
+        );
+
+        const loadingArea = document.getElementById(
+            "image-generation-loading"
+        );
+
+        if (form && submitButton && loadingArea) {
+            form.addEventListener("submit", function () {
+                submitButton.disabled = true;
+
+                submitButton.innerHTML =
+                    '<i class="bx bx-loader-alt bx-spin"></i>' +
+                    ' 生成中';
+
+                loadingArea.style.display = "flex";
+            });
+        }
+    });
+</script>
+{% endblock %}
