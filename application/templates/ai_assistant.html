@@ -1,0 +1,84 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    AI Assistant
+{% endblock %}
+
+{% block main %}
+<div class="container ai-tool-container">
+    <div class="row justify-content-center">
+        <div class="col-lg-9 col-xl-8">
+
+            <section class="ai-tool-card">
+                <div class="text-center mb-4">
+                    <p class="ai-tool-label">
+                        OPENAI APPLICATION
+                    </p>
+
+                    <h1 class="ai-tool-title">
+                        AI 文字助理
+                    </h1>
+
+                    <p class="ai-tool-description">
+                        輸入問題、主題或文字內容，
+                        讓 AI 協助回答、整理、摘要或提供想法。
+                    </p>
+                </div>
+
+                <form
+                    method="POST"
+                    action="{{ url_for('ai_assistant') }}"
+                >
+                    <div class="mb-3">
+                        <label
+                            for="prompt"
+                            class="form-label fw-bold"
+                        >
+                            請輸入內容
+                        </label>
+
+                        <textarea
+                            id="prompt"
+                            name="prompt"
+                            class="form-control ai-prompt-input"
+                            rows="8"
+                            placeholder="例如：請用繁體中文介紹地震預警系統"
+                            required
+                        >{{ prompt }}</textarea>
+                    </div>
+
+                    <div class="text-center">
+                        <button
+                            type="submit"
+                            class="btn ai-generate-button"
+                        >
+                            <i class="bx bx-message-square-dots"></i>
+                            產生回答
+                        </button>
+                    </div>
+                </form>
+
+                {% if error %}
+                    <div class="alert alert-danger mt-4">
+                        {{ error }}
+                    </div>
+                {% endif %}
+
+                {% if response %}
+                    <section class="ai-result-card mt-4">
+                        <h2 class="ai-result-title">
+                            <i class="bx bx-bot"></i>
+                            AI 回答
+                        </h2>
+
+                        <div class="ai-result-text">
+                            {{ response }}
+                        </div>
+                    </section>
+                {% endif %}
+            </section>
+
+        </div>
+    </div>
+</div>
+{% endblock %}
